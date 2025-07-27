@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <title>Age Calculator</title>
+  <style>
+    body {
+      
+      font-family: sans-serif;
+      background: #8592a4;
+      text-align: center;
+      padding: 50px;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 10px;
+      border-radius: 10px;
+    }
+    input {
+      width: 200px;
+    }
+    button {
+      width: 150px;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #6e1111;
+    }
+    #con {
+      
+      background-color: rgb(31, 116, 54);
+      border-radius: 20px;
+      padding: 70px;
+      box-shadow: 5px 5px 10px black, -5px -5px 10px;
+    
+    }
+  </style>
+</head>
+<body>
+  <div id="con">
+  <h2>🎂 Age Calculator</h2>
+  <p>अपनी जन्म तिथि चुनें:</p>
+  <input type="date" id="dob">
+  <br>
+  <button onclick="calculateAge()">उम्र निकालो</button>
+
+  <div id="result"></div>
+  </div>
+
+  <script>
+    function calculateAge() {
+      const dobInput = document.getElementById("dob").value;
+      if (!dobInput) {
+        alert("कृपया जन्म तिथि चुनें!");
+        return;
+      }
+
+      const dob = new Date(dobInput);
+      const today = new Date();
+
+      let years = today.getFullYear() - dob.getFullYear();
+      let months = today.getMonth() - dob.getMonth();
+      let days = today.getDate() - dob.getDate();
+
+      if (days < 0) {
+        months--;
+        days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+      }
+
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+
+      document.getElementById("result").innerText =
+        `आपकी उम्र है: ${years} साल, ${months} महीने, ${days} दिन`;
+    }
+  </script>
+</body>
+</html>
